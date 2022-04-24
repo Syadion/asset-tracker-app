@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     TextEditingController _passwordController = TextEditingController();
 
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,8 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     context: context);
                 print(user);
                 if (user != null) {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MenuScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const MenuScreen()));
                 }
               },
               child: const Text(

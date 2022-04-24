@@ -30,12 +30,12 @@ class _MenuScreenState extends State<MenuScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AssetSearchScreen()));
+                        builder: (context) => const AssetSearchScreen()));
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 65, 64, 64),
+                  color: const Color.fromARGB(255, 65, 64, 64),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,13 +52,15 @@ class _MenuScreenState extends State<MenuScreen> {
             //Scan Asset Tile
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AssetScanScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AssetScanScreen()));
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 65, 64, 64),
+                  color: const Color.fromARGB(255, 65, 64, 64),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -75,13 +77,15 @@ class _MenuScreenState extends State<MenuScreen> {
             //Profile tile
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 65, 64, 64),
+                  color: const Color.fromARGB(255, 65, 64, 64),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -98,13 +102,15 @@ class _MenuScreenState extends State<MenuScreen> {
             //Enquiries tile
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => EnquiriesScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EnquiriesScreen()));
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 65, 64, 64),
+                  color: const Color.fromARGB(255, 65, 64, 64),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -124,12 +130,12 @@ class _MenuScreenState extends State<MenuScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AssetRegistrationScreen()));
+                        builder: (context) => const AssetRegistrationScreen()));
               },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 65, 64, 64),
+                  color: const Color.fromARGB(255, 65, 64, 64),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

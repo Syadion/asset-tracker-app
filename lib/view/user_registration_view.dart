@@ -1,3 +1,5 @@
+import 'package:assettrackerapp/model/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,8 @@ class UserRegitrationScreen extends StatefulWidget {
 class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  final UserModel _userModel = UserModel();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,7 @@ class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
                       child: const Text('Register'),
                       onPressed: () {
                         registerUser();
+                        _saveUser();
                       }),
                   ElevatedButton(child: Text('Cancel'), onPressed: () {}),
                 ],
@@ -65,5 +70,14 @@ class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
       print(e);
     }
     //navigatorKey.currentState!.popUntil((route) =>);
+  }
+
+  void _saveUser() async {
+    _userModel.email = _emailController.text;
+    _userModel.password = _passwordController.text;
+
+    await FirebaseFirestore.instance
+        .collection('userData')
+        .add(_userModel.toJson());
   }
 }

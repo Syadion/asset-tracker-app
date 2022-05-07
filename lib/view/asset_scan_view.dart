@@ -10,6 +10,6 @@ class AssetScanScreen extends StatefulWidget {
 class _AssetScanScreenState extends State<AssetScanScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

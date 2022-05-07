@@ -1,8 +1,12 @@
-class User {
+class UserModel {
   String? email;
   String? password;
 
-  User();
+  UserModel();
 
   Map<String, dynamic> toJson() => {'email': email, 'password': password};
+
+  UserModel.fromSnapshot(snapshot)
+      : email = snapshot.data()['email'],
+        password = snapshot.data()['password'];
 }

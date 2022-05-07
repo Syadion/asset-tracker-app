@@ -106,7 +106,6 @@ class _LoginScreenState extends State<LoginScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0)),
               onPressed: () async {
-                //lets test the app
                 User? user = await loginUsingEmailPasword(
                     email: _emailController.text,
                     password: _passwordController.text,

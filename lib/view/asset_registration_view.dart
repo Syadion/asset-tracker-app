@@ -1,3 +1,4 @@
+import 'package:assettrackerapp/model/asset.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,7 +19,7 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
   final TextEditingController _assetLocationController =
       TextEditingController();
   final TextEditingController _assetTypeController = TextEditingController();
-  var loading = false;
+  final Asset _asset = Asset();
 
   @override
   Widget build(BuildContext context) {
@@ -80,17 +81,25 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
                 height: 18.0,
               ),
               RawMaterialButton(
-                  fillColor: const Color(0xFF0069FE),
-                  elevation: 0.0,
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)),
-                  onPressed: () {
-                    if (_formKey.currentState != null &&
-                        _formKey.currentState!.validate()) {
-                      registerAsset();
-                    }
-                  }),
+                fillColor: const Color(0xFF0069FE),
+                elevation: 0.0,
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0)),
+                onPressed: () {
+                  if (_formKey.currentState != null &&
+                      _formKey.currentState!.validate()) {
+                    _saveAsset();
+                  }
+                },
+                child: const Text(
+                  'Register',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -98,24 +107,14 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
     );
   }
 
-  Future registerAsset() async {
-    setState(() {
-      loading = true;
-    });
-    try {
-      await FirebaseFirestore.instance.collection('assetData').add({
-        'asset_id': _assetIdController.text,
-        'asset_name': _assetNameController.text,
-        'asset_type': _assetTypeController.text,
-        'asset_location': _assetLocationController.text
-      });
-      await showDialog(
-          context: context,
-          builder: (context) => const AlertDialog(
-                title: Text("registration successful"),
-              ));
-    } on Exception {
-      return null;
-    }
+  void _saveAsset() async {
+    _asset.assetId = _assetIdController.text;
+    _asset.assetName = _assetNameController.text;
+    _asset.assetType = _assetTypeController.text;
+    _asset.assetLocation = _assetLocationController.text;
+
+    await FirebaseFirestore.instance
+        .collection('assetData')
+        .add(_asset.toJson());
   }
 }

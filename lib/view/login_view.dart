@@ -1,4 +1,5 @@
 import 'package:assettrackerapp/view/main_menu_view.dart';
+import 'package:assettrackerapp/view/user_registration_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -99,30 +100,55 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Container(
             width: double.infinity,
-            child: RawMaterialButton(
-              fillColor: const Color(0xFF0069FE),
-              elevation: 0.0,
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0)),
-              onPressed: () async {
-                User? user = await loginUsingEmailPasword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    context: context);
-                print(user);
-                if (user != null) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const MenuScreen()));
-                }
-              },
-              child: const Text(
-                "Login",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
+            child: Column(
+              children: [
+                RawMaterialButton(
+                  fillColor: const Color(0xFF0069FE),
+                  elevation: 0.0,
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)),
+                  onPressed: () async {
+                    User? user = await loginUsingEmailPasword(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                        context: context);
+                    print(user);
+                    if (user != null) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MenuScreen()));
+                    }
+                  },
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                RawMaterialButton(
+                  fillColor: const Color(0xFF0069FE),
+                  elevation: 0.0,
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const UserRegitrationScreen()));
+                  },
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

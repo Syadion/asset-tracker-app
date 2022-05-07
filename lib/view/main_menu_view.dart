@@ -1,3 +1,4 @@
+import 'package:assettrackerapp/services/auth_service.dart';
 import 'package:assettrackerapp/view/Enquires_view.dart';
 import 'package:assettrackerapp/view/asset_registration_view.dart';
 import 'package:assettrackerapp/view/asset_scan_view.dart';
@@ -18,7 +19,7 @@ class _MenuScreenState extends State<MenuScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Main Manu'),
+        title: Text('User : ${AuthService().currentUser?.email}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

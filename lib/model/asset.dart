@@ -12,4 +12,10 @@ class Asset {
         'asset type': assetType,
         'asset location': assetLocation
       };
+
+  Asset.fromSnapshot(snapshot)
+      : assetId = snapshot.data()['asset id'],
+        assetName = snapshot.data()['asset name'],
+        assetType = snapshot.data()['asset type'],
+        assetLocation = snapshot.data()['asset location'];
 }

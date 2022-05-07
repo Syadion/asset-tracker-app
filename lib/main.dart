@@ -12,9 +12,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [Provider.value(value: AuthService())],
     child: const MyApp(),
-  )
-      //const MyApp()
-      );
+  ));
 }
 
 class MyApp extends StatelessWidget {

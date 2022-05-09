@@ -12,4 +12,10 @@ class AuthService {
       return null;
     }
   }
+
+  //signOut
+  Future<String> signOut() async {
+    await _firebaseAuth.signOut();
+    return 'sign Out sucessful';
+  }
 }

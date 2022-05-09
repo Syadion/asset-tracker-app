@@ -10,7 +10,9 @@ void main() async {
   await AuthService().getOrCreateUser();
 
   runApp(MultiProvider(
-    providers: [Provider.value(value: AuthService())],
+    providers: [
+      Provider.value(value: AuthService()),
+    ],
     child: const MyApp(),
   ));
 }

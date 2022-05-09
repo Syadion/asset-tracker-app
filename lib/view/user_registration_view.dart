@@ -20,37 +20,39 @@ class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: const Text('Register User'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            children: [
-              TextField(controller: _emailController),
-              const SizedBox(
-                height: 18.0,
-              ),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 18.0,
-              ),
-              Row(
-                children: [
-                  ElevatedButton(
-                      child: const Text('Register'),
-                      onPressed: () {
-                        registerUser();
-                        _saveUser();
-                      }),
-                  ElevatedButton(child: Text('Cancel'), onPressed: () {}),
-                ],
-              )
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextField(controller: _emailController),
+            const SizedBox(
+              height: 18.0,
+            ),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+            ),
+            const SizedBox(
+              height: 18.0,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    child: const Text('Register'),
+                    onPressed: () {
+                      registerUser();
+                      _saveUser();
+                    }),
+                ElevatedButton(child: const Text('Cancel'), onPressed: () {}),
+              ],
+            )
+          ],
         ),
       ),
     );

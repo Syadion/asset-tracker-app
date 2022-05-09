@@ -1,21 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Asset {
-  String? assetId;
-  String? assetName;
-  String? assetType;
-  String? assetLocation;
+  final String assetId;
+  final String assetName;
+  final String assetType;
+  final String assetLocation;
 
-  Asset();
+  Asset(
+      {required this.assetId,
+      required this.assetName,
+      required this.assetType,
+      required this.assetLocation});
 
-  Map<String, dynamic> toJson() => {
-        'asset id': assetId,
-        'asset name': assetName,
-        'asset type': assetType,
-        'asset location': assetLocation
-      };
+  Map<String, dynamic> toMap() {
+    return {
+      'asset id': assetId,
+      'asset name': assetName,
+      'asset type': assetType,
+      'asset location': assetLocation
+    };
+  }
 
-  Asset.fromSnapshot(snapshot)
-      : assetId = snapshot.data()['asset id'],
-        assetName = snapshot.data()['asset name'],
+  Asset.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
+      : assetId = doc.data()?['asset id'],
+        assetName = doc.data()?['asset name'],
+        assetType = doc.data()?['asset type'],
+        assetLocation = doc.data()?['asset location'];
+
+  /*Asset.fromSnapshot(snapshot)
+      : assetName = snapshot.data()['asset name'],
         assetType = snapshot.data()['asset type'],
-        assetLocation = snapshot.data()['asset location'];
+        assetLocation = snapshot.data()['asset location'];*/
 }

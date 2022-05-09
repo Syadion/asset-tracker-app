@@ -1,8 +1,13 @@
+import 'package:assettrackerapp/model/asset.dart';
+import 'package:assettrackerapp/services/asset_service.dart';
+import 'package:assettrackerapp/view/helpers/AssetCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AssetSearchScreen extends StatefulWidget {
-  const AssetSearchScreen({Key? key}) : super(key: key);
+  const AssetSearchScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AssetSearchScreen> createState() => _AssetSearchScreenState();
@@ -10,37 +15,15 @@ class AssetSearchScreen extends StatefulWidget {
 
 class _AssetSearchScreenState extends State<AssetSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  Map? map;
+  final _formKey = GlobalKey<FormState>();
 
-  @override
+  /*@override
   void initState() {
     super.initState();
-    _searchController.addListener(_onSearchChanged);
+    _initRetrieval();
   }
 
-  @override
-  void dispose() {
-    _searchController.removeListener(_onSearchChanged);
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  _onSearchChanged() {
-    print(_searchController.text);
-  }
-/*
-  List<Object> _assetList = [];
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    getAssetList();
-  }
-*/
-  /*final CollectionReference _assetData =
-      FirebaseFirestore.instance.collection('assetData');*/
-
-  searchAssetInFirebase() async {
+  /*searchAssetInFirebase() async {
     if (_searchController.text.isNotEmpty) {
       FirebaseFirestore.instance
           .collection('assetData')
@@ -56,7 +39,19 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
                   }
               });
     }
+  }*/
+
+  Future<void> _initRetrieval() async {
+    assetList = service.retrieveAssets();
+    retrievedAssetList = await service.retrieveAssets();
   }
+
+  DatabaseService service = DatabaseService();
+  Future<List<Asset>> assetList;
+  List<Asset> retrievedAssetList;*/
+
+  final CollectionReference asset =
+      FirebaseFirestore.instance.collection('assetData');
 
   @override
   Widget build(BuildContext context) {
@@ -65,45 +60,78 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
         backgroundColor: Colors.black,
         title: const Text('Search Asset'),
       ),
-      body: Container(
+      /*body: FutureBuilder(
+          future: asset.get(),
+          builder: ((context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data!.docs.isEmpty) {
+                final data = snapshot.data!.docs;
+                return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return const ListTile(
+                        title: Text('asset'),
+                      );
+                    });
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }
+          }),
+        )*/
+
+      /*Container(
         child: Column(
-          children: <Widget>[
-            TextField(
+          children: [
+            TextFormField(
                 controller: _searchController,
                 decoration:
                     const InputDecoration(prefixIcon: Icon(Icons.search))),
-            /*Expanded(
-              child: ListView.builder(
-                  itemCount: _assetList.length,
-                  itemBuilder: (context, index) {
-                    return AssetCard(_assetList[index] as Asset);
-                  }),
-            ),*/
-            ElevatedButton(
-                onPressed: () {
-                  searchAssetInFirebase();
-                },
-                child: const Text('search')),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: retrievedAssetList.length,
+                    itemBuilder: (context, index) {
+                      return AssetCard(retrievedAssetList[index]);
+                    })),
           ],
         ),
-      ),
+      ),*/
     );
   }
-/*
-  Future getAssetList() async {
-    var data = await FirebaseFirestore.instance.collection('assetData').get();
 
-    setState(() {
-      _assetList = List.from(data.docs.map((doc) => Asset.fromSnapshot(doc)));
-    });
-  }
-*/
-  /*
-  Future getAssetList() async {
-    var data = await FirebaseFirestore.instance
-        .collection('assetData')
-        .doc('asset_name');
-  }*/
+  // ignore: non_constant_identifier_names
+  /* Widget BuildResults(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: _assetData.snapshots().asBroadcastStream(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            print(snapshot.data);
+            return ListView(
+              children: [
+                ...snapshot.data!.docs
+                    .where((QueryDocumentSnapshot<Object?> element) =>
+                        element['assetName'].toString().toLowerCase().contains(
+                            _searchController.toString().toLowerCase()))
+                    .map((QueryDocumentSnapshot<Object?> data) {
+                  final String assetName = data.get('asset name');
+                  final String assetLocation = data.get('asset location');
+
+                  return ListTile(
+                      title: Text(assetName),
+                      subtitle: Text(assetLocation),
+                      onTap: () {});
+                })
+              ],
+            );
+          }
+        });*/
+}
 
   /*Widget buildResults(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -132,38 +160,3 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
                 })
               ],
             );*/
-  /*if (snapshot.data!.docs
-                .where((QueryDocumentSnapshot<Object?> element) =>
-                    element['assetName']
-                        .toString()
-                        .toLowerCase()
-                        .contains(_searchBar.text))
-                .isEmpty) {
-              return const Center(
-                child: Text('No data'),
-              );
-            } else {
-              return ListView(
-                children: [
-                  ...snapshot.data!.docs
-                      .where((QueryDocumentSnapshot<Object?> element) =>
-                          element['assetName']
-                              .toString()
-                              .toLowerCase()
-                              .contains(_searchBar.text))
-                      .map((QueryDocumentSnapshot<Object?> data) {
-                    final String assetName = data.get('assetName');
-
-                    return ListTile(
-                      title: Text(assetName),
-                      leading: const CircleAvatar(backgroundColor: Colors.blue),
-                    );
-                  })
-                ],
-              );
-            }
-          }
-          }
-        });
-  }*/
-}

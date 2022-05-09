@@ -19,42 +19,40 @@ class _AssetScanScreenState extends State<AssetScanScreen> {
         backgroundColor: Colors.black,
         title: const Text('Scan Asset'),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                      label: Text('enter text to generate')),
-                  onChanged: (value) {
-                    if (value.isEmpty) {
-                      setState(() {
-                        qrController = '';
-                      });
-                    } else {
-                      setState(() {
-                        qrController = value;
-                      });
-                    }
-                  },
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                    label: Text('enter text to generate')),
+                onChanged: (value) {
+                  if (value.isEmpty) {
+                    setState(() {
+                      qrController = '';
+                    });
+                  } else {
+                    setState(() {
+                      qrController = value;
+                    });
+                  }
+                },
+              ),
 
-                const SizedBox(
-                  height: 30.0,
-                ),
+              const SizedBox(
+                height: 30.0,
+              ),
 
-                //QR code widget
-                BarcodeWidget(
-                    data: qrController.trim(), barcode: Barcode.qrCode()),
-                const SizedBox(
-                  height: 50,
-                ),
+              //QR code widget (QR generator)
+              BarcodeWidget(
+                  data: qrController.trim(), barcode: Barcode.qrCode()),
+              const SizedBox(
+                height: 50,
+              ),
 
-                Text(qrController),
-              ],
-            ),
+              Text(qrController),
+            ],
           ),
         ),
       ),

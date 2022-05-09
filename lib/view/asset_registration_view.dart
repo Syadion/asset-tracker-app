@@ -25,7 +25,7 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
 
   bool isLoading = false;
 
-  //String qrController = '';
+  String qrController = '';
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +43,10 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                /* BarcodeWidget(
-                    data: qrController.trim(), barcode: Barcode.qrCode()),
+                BarcodeWidget(data: qrController, barcode: Barcode.qrCode()),
                 const SizedBox(
                   height: 50,
-                ),*/
+                ),
 
                 //asset ID
                 TextFormField(
@@ -62,7 +61,7 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
                     }
                     return null;
                   },
-                  /*onChanged: (value) {
+                  onChanged: (value) {
                     if (value.isEmpty) {
                       setState(() {
                         qrController = '';
@@ -72,7 +71,7 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
                         qrController = value;
                       });
                     }
-                  },*/
+                  },
                 ),
                 const SizedBox(
                   height: 18.0,

@@ -1,6 +1,6 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AssetScanScreen extends StatefulWidget {
   const AssetScanScreen({Key? key}) : super(key: key);
@@ -45,8 +45,10 @@ class _AssetScanScreenState extends State<AssetScanScreen> {
               ),
 
               //QR code widget (QR generator)
-              BarcodeWidget(
-                  data: qrController.trim(), barcode: Barcode.qrCode()),
+              QrImage(
+                data: qrController.trim(),
+                size: 200,
+              ),
               const SizedBox(
                 height: 50,
               ),

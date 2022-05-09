@@ -1,8 +1,8 @@
 import 'package:assettrackerapp/model/asset.dart';
 import 'package:assettrackerapp/services/asset_service.dart';
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AssetRegistrationScreen extends StatefulWidget {
   const AssetRegistrationScreen({Key? key}) : super(key: key);
@@ -43,9 +43,10 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                BarcodeWidget(data: qrController, barcode: Barcode.qrCode()),
-                const SizedBox(
-                  height: 50,
+                //qr generator
+                QrImage(
+                  data: qrController,
+                  size: 200,
                 ),
 
                 //asset ID

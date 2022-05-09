@@ -1,6 +1,6 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AssetQrGenerator extends StatefulWidget {
   const AssetQrGenerator({Key? key}) : super(key: key);
@@ -33,8 +33,10 @@ class _AssetQrGeneratorState extends State<AssetQrGenerator> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                BarcodeWidget(
-                    data: qrController.trim(), barcode: Barcode.qrCode()),
+                QrImage(
+                  data: qrController.trim(),
+                  size: 200,
+                ),
                 const SizedBox(
                   height: 50,
                 ),

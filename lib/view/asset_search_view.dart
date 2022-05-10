@@ -1,6 +1,4 @@
-import 'package:assettrackerapp/model/asset.dart';
 import 'package:assettrackerapp/services/asset_service.dart';
-import 'package:assettrackerapp/view/helpers/AssetCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +15,19 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  //doc IDs
+  List<String> docIDs = [];
+
+  // get doc IDs
+  Future getDocId() async {
+    await FirebaseFirestore.instance
+        .collection('assetData')
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((document) {
+              print(document.reference);
+              docIDs.add(document.reference.id);
+            }));
+  }
   /*@override
   void initState() {
     super.initState();
@@ -50,9 +61,6 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
   Future<List<Asset>> assetList;
   List<Asset> retrievedAssetList;*/
 
-  final CollectionReference asset =
-      FirebaseFirestore.instance.collection('assetData');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,29 +68,25 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
         backgroundColor: Colors.black,
         title: const Text('Search Asset'),
       ),
-      /*body: FutureBuilder(
-          future: asset.get(),
-          builder: ((context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data!.docs.isEmpty) {
-                final data = snapshot.data!.docs;
-                return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return const ListTile(
-                        title: Text('asset'),
-                      );
-                    });
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }
-          }),
-        )*/
+      body: Column(
+        children: [
+          Expanded(
+              child: FutureBuilder(
+                  future: getDocId(),
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                        itemCount: docIDs.length,
+                        itemBuilder: ((context, index) {
+                          return ListTile(
+                            title: GetAssetDetails(documentId: docIDs[index]),
+                          );
+                        }));
+                  })),
+        ],
+      ),
+    );
 
-      /*Container(
+    /*Container(
         child: Column(
           children: [
             TextFormField(
@@ -98,11 +102,9 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
           ],
         ),
       ),*/
-    );
-  }
 
-  // ignore: non_constant_identifier_names
-  /* Widget BuildResults(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    /* Widget BuildResults(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
         stream: _assetData.snapshots().asBroadcastStream(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -131,6 +133,7 @@ class _AssetSearchScreenState extends State<AssetSearchScreen> {
             );
           }
         });*/
+  }
 }
 
   /*Widget buildResults(BuildContext context) {

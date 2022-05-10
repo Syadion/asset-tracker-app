@@ -4,6 +4,7 @@ import 'package:assettrackerapp/view/asset_registration_view.dart';
 import 'package:assettrackerapp/view/asset_scan_view.dart';
 import 'package:assettrackerapp/view/asset_search_view.dart';
 import 'package:assettrackerapp/view/profile_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -13,14 +14,23 @@ class MenuScreen extends StatefulWidget {
   State<MenuScreen> createState() => _MenuScreenState();
 }
 
+final user = FirebaseAuth.instance.currentUser!;
+
 class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('User : ${AuthService().currentUser?.email}'),
-      ),
+          backgroundColor: Colors.black,
+          title: Text('user:' + user.email!),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+              },
+              child: const Icon(Icons.logout),
+            )
+          ]),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: GridView(
@@ -43,7 +53,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: const <Widget>[
                     Text(
                       'Search Asset',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ],
                 ),
@@ -68,7 +78,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: const <Widget>[
                     Text(
                       'Scan Asset',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ],
                 ),
@@ -93,7 +103,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: const <Widget>[
                     Text(
                       'Profile',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ],
                 ),
@@ -118,7 +128,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: const <Widget>[
                     Text(
                       'Enqueries',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ],
                 ),
@@ -143,7 +153,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   children: const <Widget>[
                     Text(
                       'Register Asset',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ],
                 ),
@@ -151,7 +161,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ],
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, mainAxisSpacing: 10.0, crossAxisSpacing: 10.0),
+              crossAxisCount: 2, mainAxisSpacing: 5.0, crossAxisSpacing: 5.0),
         ),
       ),
     );

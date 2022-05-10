@@ -40,6 +40,8 @@ dependencies:
   provider: ^6.0.2
   flutter_barcode_scanner: ^2.0.0
   qr_flutter: ^4.0.0
+  path_provider: ^2.0.9
+  share_plus: ^4.0.4
 
 dev_dependencies:
   flutter_test:

@@ -29,27 +29,49 @@ class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextField(controller: _emailController),
+            TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                hintText: "User Email",
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Colors.black,
+                ),
+              ),
+            ),
             const SizedBox(
-              height: 18.0,
+              height: 44.0,
             ),
             TextField(
               controller: _passwordController,
               obscureText: true,
+              decoration: const InputDecoration(
+                hintText: "User Password",
+                prefixIcon: Icon(
+                  Icons.security,
+                  color: Colors.black,
+                ),
+              ),
             ),
             const SizedBox(
-              height: 18.0,
+              height: 12.0,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
+                MaterialButton(
                     child: const Text('Register'),
+                    color: Colors.grey,
                     onPressed: () {
                       registerUser();
                       _saveUser();
                     }),
-                ElevatedButton(child: const Text('Cancel'), onPressed: () {}),
+                MaterialButton(
+                    child: const Text('Cancel'),
+                    color: Colors.grey,
+                    onPressed: () {}),
               ],
             )
           ],

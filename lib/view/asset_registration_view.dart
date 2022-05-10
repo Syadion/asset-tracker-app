@@ -45,7 +45,7 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
               children: [
                 //qr generator
                 QrImage(
-                  data: qrController,
+                  data: _assetIdController.text.toString(),
                   size: 200,
                 ),
 

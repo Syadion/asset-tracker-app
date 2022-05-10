@@ -5,16 +5,16 @@ import 'package:assettrackerapp/view/asset_search_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class MenuScreen extends StatefulWidget {
-  const MenuScreen({Key? key}) : super(key: key);
+class AdminMenuScreen extends StatefulWidget {
+  const AdminMenuScreen({Key? key}) : super(key: key);
 
   @override
-  State<MenuScreen> createState() => _MenuScreenState();
+  State<AdminMenuScreen> createState() => _AdminMenuScreenState();
 }
 
 final user = FirebaseAuth.instance.currentUser!;
 
-class _MenuScreenState extends State<MenuScreen> {
+class _AdminMenuScreenState extends State<AdminMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

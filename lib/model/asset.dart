@@ -32,3 +32,16 @@ class Asset {
         assetType = snapshot.data()['asset type'],
         assetLocation = snapshot.data()['asset location'];*/
 }
+
+class AssetDataDisplay {
+  final String assetId;
+  final String assetName;
+  final String assetType;
+  final String assetLocation;
+
+  AssetDataDisplay(
+      {required this.assetId,
+      required this.assetName,
+      required this.assetType,
+      required this.assetLocation});
+}

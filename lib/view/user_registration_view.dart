@@ -3,18 +3,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class UserRegitrationScreen extends StatefulWidget {
-  const UserRegitrationScreen({Key? key}) : super(key: key);
+class UserRegistrationScreen extends StatefulWidget {
+  const UserRegistrationScreen({Key? key}) : super(key: key);
 
   @override
-  State<UserRegitrationScreen> createState() => _UserRegitrationScreenState();
+  State<UserRegistrationScreen> createState() => _UserRegistrationScreenState();
 }
 
-class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
+class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final UserModel _userModel = UserModel();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +74,14 @@ class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
                     onPressed: () {
                       registerUser();
                       _saveUser();
+                      const AlertDialog(title: Text('registration successful'));
                     }),
                 MaterialButton(
                     child: const Text('Cancel'),
                     color: Colors.grey,
-                    onPressed: () {}),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
               ],
             )
           ],
@@ -91,9 +101,15 @@ class _UserRegitrationScreenState extends State<UserRegitrationScreen> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(e.message.toString()),
+            );
+          });
+      //navigatorKey.currentState!.popUntil((route) =>);
     }
-    //navigatorKey.currentState!.popUntil((route) =>);
   }
 
   void _saveUser() async {

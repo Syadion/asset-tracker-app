@@ -66,10 +66,10 @@ class _AssetQrGeneratorState extends State<AssetQrGenerator> {
     );
   }
 
-  void getAssetData() async {
+  /*void getAssetData() async {
     DocumentSnapshot specificAssetData = await FirebaseFirestore.instance
         .collection('assetData')
         .doc('uid')
         .get();
-  }
+  }*/
 }

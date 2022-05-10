@@ -122,9 +122,8 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
                 const SizedBox(
                   height: 18.0,
                 ),
-                RawMaterialButton(
-                  fillColor: const Color(0xFF0069FE),
-                  elevation: 0.0,
+                MaterialButton(
+                  color: const Color(0xFF0069FE),
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0)),
@@ -132,10 +131,10 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
                     if (_formKey.currentState!.validate()) {
                       DatabaseService service = DatabaseService();
                       Asset asset = Asset(
-                        assetId: _assetIdController.text,
-                        assetName: _assetNameController.text,
-                        assetType: _assetTypeController.text,
-                        assetLocation: _assetLocationController.text,
+                        assetId: _assetIdController.text.trim(),
+                        assetName: _assetNameController.text.trim(),
+                        assetType: _assetTypeController.text.trim(),
+                        assetLocation: _assetLocationController.text.trim(),
                       );
                       setState(() {
                         isLoading = true;
@@ -144,11 +143,6 @@ class _AssetRegistrationScreenState extends State<AssetRegistrationScreen> {
                       setState(() {
                         isLoading = false;
                       });
-
-                      //Navigator.push(
-                      //  context,
-                      //MaterialPageRoute(
-                      //  builder: (context) => const AssetQrGenerator()));
                     }
                   },
                   child: const Text(

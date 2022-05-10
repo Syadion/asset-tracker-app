@@ -27,20 +27,6 @@ class DatabaseService {
         .map((docSnapshot) => Asset.fromDocumentSnapshot(docSnapshot))
         .toList();
   }
-/*class AssetService {
-  FirebaseFirestore? _instance;
-
-  List<Asset> _assets = [];
-  List<Asset> getAssets() {
-    return _assets;
-  }
-
-  Future<void> getAssetsCollectionFromFirebase() async {
-    _instance = FirebaseFirestore.instance;
-
-    Future<QuerySnapshot<Map<String, dynamic>>> assets = _instance!.collection('assetData').get();
-  }
-}*/
 }
 
 class GetAssetDetails extends StatelessWidget {

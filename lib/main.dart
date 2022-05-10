@@ -1,5 +1,5 @@
 import 'package:assettrackerapp/services/Auth_service.dart';
-import 'package:assettrackerapp/services/main_service.dart';
+import 'package:assettrackerapp/view/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +24,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: const AuthCheck());
+        home: const LoginScreen());
   }
 }

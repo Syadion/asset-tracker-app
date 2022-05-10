@@ -29,7 +29,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             );
           });
     } on FirebaseAuthException catch (e) {
-      print(e);
       showDialog(
           context: context,
           builder: (context) {
@@ -75,6 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           MaterialButton(
             onPressed: () {
               forgotPassword();
+              _clearReportTextField();
             },
             child: const Text('Recover account'),
             color: Colors.grey,
@@ -82,5 +82,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ],
       ),
     );
+  }
+
+  void _clearReportTextField() {
+    _emailController.clear();
   }
 }

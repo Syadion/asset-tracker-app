@@ -70,8 +70,6 @@ class _AssetScanScreenState extends State<AssetScanScreen> {
     String res = await FlutterBarcodeScanner.scanBarcode(
         "#ff6666", 'Cancel', true, ScanMode.QR);
 
-    print(res);
-
     setState(() {
       qrController = res;
     });
